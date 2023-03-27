@@ -6,6 +6,7 @@ package practica2;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -85,7 +86,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Inicio = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         EmpaCont = new javax.swing.JLabel();
         Tempaquetado = new javax.swing.JLabel();
@@ -97,7 +98,6 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         jButton2 = new javax.swing.JButton();
         tiem = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        mov3 = new practica2.Circulo();
         jPanel2 = new javax.swing.JPanel();
         ProduccionCont = new javax.swing.JLabel();
         Tproduccion = new javax.swing.JLabel();
@@ -115,8 +115,6 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         Sa3 = new practica2.Circulo();
         Sa4 = new practica2.Circulo();
         Sa5 = new practica2.Circulo();
-        mov4 = new practica2.Circulo();
-        circulo5 = new practica2.Circulo();
         jPanel4 = new javax.swing.JPanel();
         InventarioCont = new javax.swing.JLabel();
         Tinventario = new javax.swing.JLabel();
@@ -131,15 +129,19 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         mov2 = new practica2.mov();
+        canvas1 = new java.awt.Canvas();
+        mov3 = new practica2.mov3();
+        mov4 = new practica2.mov4();
 
         jLabel7.setText("00:00:00");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Inicio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        Inicio.setText("Inicio");
+        Inicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                InicioActionPerformed(evt);
             }
         });
 
@@ -262,20 +264,21 @@ public class simulacion extends javax.swing.JFrame implements Observer {
 
         jButton3.setText("Reporte");
 
-        javax.swing.GroupLayout mov3Layout = new javax.swing.GroupLayout(mov3);
-        mov3.setLayout(mov3Layout);
-        mov3Layout.setHorizontalGroup(
-            mov3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
-        );
-        mov3Layout.setVerticalGroup(
-            mov3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 74, Short.MAX_VALUE)
-        );
-
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jPanel2ComponentResized(evt);
+            }
+        });
 
         ProduccionCont.setText("00");
+        ProduccionCont.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                ProduccionContInputMethodTextChanged(evt);
+            }
+        });
 
         Tproduccion.setText("00:00:00");
 
@@ -465,7 +468,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(Tsalida)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                         .addComponent(SalidaCont)
                         .addGap(123, 123, 123))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -498,28 +501,6 @@ public class simulacion extends javax.swing.JFrame implements Observer {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout mov4Layout = new javax.swing.GroupLayout(mov4);
-        mov4.setLayout(mov4Layout);
-        mov4Layout.setHorizontalGroup(
-            mov4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 89, Short.MAX_VALUE)
-        );
-        mov4Layout.setVerticalGroup(
-            mov4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout circulo5Layout = new javax.swing.GroupLayout(circulo5);
-        circulo5.setLayout(circulo5Layout);
-        circulo5Layout.setHorizontalGroup(
-            circulo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
-        );
-        circulo5Layout.setVerticalGroup(
-            circulo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -530,6 +511,13 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         InventarioCont.setText("00");
 
         Tinventario.setText("00:00:00");
+        Tinventario.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                TinventarioInputMethodTextChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout Inv1Layout = new javax.swing.GroupLayout(Inv1);
         Inv1.setLayout(Inv1Layout);
@@ -653,15 +641,55 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Empaquetado: ");
 
+        mov2.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                mov2ComponentMoved(evt);
+            }
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                mov2ComponentResized(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                mov2ComponentShown(evt);
+            }
+        });
+
         javax.swing.GroupLayout mov2Layout = new javax.swing.GroupLayout(mov2);
         mov2.setLayout(mov2Layout);
         mov2Layout.setHorizontalGroup(
             mov2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mov2Layout.createSequentialGroup()
+                .addContainerGap(126, Short.MAX_VALUE)
+                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
         mov2Layout.setVerticalGroup(
             mov2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mov2Layout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
+        );
+
+        javax.swing.GroupLayout mov3Layout = new javax.swing.GroupLayout(mov3);
+        mov3.setLayout(mov3Layout);
+        mov3Layout.setHorizontalGroup(
+            mov3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 227, Short.MAX_VALUE)
+        );
+        mov3Layout.setVerticalGroup(
+            mov3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout mov4Layout = new javax.swing.GroupLayout(mov4);
+        mov4.setLayout(mov4Layout);
+        mov4Layout.setHorizontalGroup(
+            mov4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        mov4Layout.setVerticalGroup(
+            mov4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 137, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -682,39 +710,36 @@ public class simulacion extends javax.swing.JFrame implements Observer {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(mov3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3))
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addGap(82, 82, 82)
-                                .addComponent(circulo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(171, 171, 171))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(37, 37, 37)))
-                        .addComponent(mov4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(mov4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(mov2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)
                         .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(431, 431, 431))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(mov3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 117, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(558, 558, 558)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -725,48 +750,40 @@ public class simulacion extends javax.swing.JFrame implements Observer {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(tiem, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(mov2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(46, 46, 46)
-                                            .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(36, 36, 36)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(circulo5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(jLabel5)))))))
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30))
+                                    .addComponent(mov2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mov4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addContainerGap(213, Short.MAX_VALUE))
+                        .addGap(213, 213, 213))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
+                        .addGap(87, 87, 87)
                         .addComponent(mov3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(158, 158, 158)
+                        .addGap(139, 139, 139)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(mov4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(120, 120, 120)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(finsalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -777,7 +794,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void InicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioActionPerformed
 
         // Se agrega el cambio resibido en la clase Observable(temporizador)
         tim.addObserver(this);
@@ -792,17 +809,17 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
         reloj1.start();
         
-        act2 = false;
-        reloj2.start();
+//        act2 = false;
+//        reloj2.start();
+//        reloj2.suspend();
         
-        
-        act3 = true;
+        act3 = false;
         reloj3.start();
+        reloj3.suspend();
         
-        
-        act4 = true;
+        act4 = false;
         reloj4.start();
-        
+        reloj4.suspend();
         
         //inicio
         inicio.setC(0);
@@ -882,6 +899,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
         Pro3.setC(100000);
         Pro3.setColor(Color.GREEN);
+        Pro3.setCant(7);
         Pro3.setdireccion(0, -100, 0, 0);
         Pro3.SetVelocidad(240);
         Pro3.inicio();
@@ -923,8 +941,16 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         Em2.pausa();
         
         
+        
+        mov3.setColor(Color.green);
+        mov3.setdireccion(100);
+        mov3.inicio();
+        mov3.pausa();
+        
+        
         Em3.setC(100000);
         Em3.setColor(Color.MAGENTA);
+        Em3.setCant(8);
         Em3.setdireccion(0, -100, 0, 0);
         Em3.SetVelocidad(240);
         Em3.inicio();
@@ -932,7 +958,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
         Em4.setC(100000);
         Em4.setColor(Color.MAGENTA);
-        Em4.setCant(7);
+        Em4.setCant(8);
         Em4.setdireccion(0, -100, 0, 0);
         Em4.SetVelocidad(240);
         Em4.inicio();
@@ -947,10 +973,15 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         Em5.pausa();
         
         
+        mov4.setColor(Color.magenta);
+        mov4.setdireccion(100);
+        mov4.inicio();
+        mov4.pausa();
+        
         //Salida
 
          Sa1.setC(100000);
-        Sa1.setColor(Color.MAGENTA);
+        Sa1.setColor(Color.RED);
         Sa1.setCant(7);
         Sa1.setdireccion(0, -100, 0, 0);
         Sa1.SetVelocidad(240);
@@ -958,7 +989,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         Sa1.pausa();
         
         Sa2.setC(100000);
-        Sa2.setColor(Color.MAGENTA);
+        Sa2.setColor(Color.RED);
         Sa2.setCant(7);
         Sa2.setdireccion(0, -100, 0, 0);
         Sa2.SetVelocidad(240);
@@ -967,14 +998,15 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
         
         Sa3.setC(100000);
-        Sa3.setColor(Color.MAGENTA);
+        Sa3.setColor(Color.RED);
+        Sa3.setCant(7);
         Sa3.setdireccion(0, -100, 0, 0);
         Sa3.SetVelocidad(240);
         Sa3.inicio();
         Sa3.pausa();
         
         Sa4.setC(100000);
-        Sa4.setColor(Color.MAGENTA);
+        Sa4.setColor(Color.RED);
         Sa4.setCant(7);
         Sa4.setdireccion(0, -100, 0, 0);
         Sa4.SetVelocidad(240);
@@ -982,7 +1014,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         Sa4.pausa();
         
         Sa5.setC(100000);
-        Sa5.setColor(Color.MAGENTA);
+        Sa5.setColor(Color.RED);
         Sa5.setCant(7);
         Sa5.setdireccion(0, -1000, 0, 0);
         Sa5.SetVelocidad(240);
@@ -991,33 +1023,51 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
 
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_InicioActionPerformed
 
     private void jPanel4ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jPanel4ComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel4ComponentAdded
 
-    
-    private int conteoi(){
-        int total = 0;
- 
-        int quinto = i.charAt(4); 
-        int sexto = i.charAt(5);
-
-        total = quinto+sexto;
-
-        return total;
+    private void mov2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_mov2ComponentShown
         
-                
-    }
-    
-    
+        
+    }//GEN-LAST:event_mov2ComponentShown
+
+    private void jPanel2ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentResized
+            
+    }//GEN-LAST:event_jPanel2ComponentResized
+
+    private void ProduccionContInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_ProduccionContInputMethodTextChanged
+       
+    }//GEN-LAST:event_ProduccionContInputMethodTextChanged
+
+    private void mov2ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_mov2ComponentResized
+  
+       
+    }//GEN-LAST:event_mov2ComponentResized
+
+    private void TinventarioInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_TinventarioInputMethodTextChanged
+       super.processInputMethodEvent(evt);
+        System.out.println(evt.toString());  
+       if(this.i.toString() == evt.toString()) {
+        act2 = true;
+        reloj2.start(); 
+       } else {}
+    }//GEN-LAST:event_TinventarioInputMethodTextChanged
+
+    private void mov2ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_mov2ComponentMoved
+        
+    }//GEN-LAST:event_mov2ComponentMoved
+
+
     
     @Override
     public void update(Observable o, Object arg) {
         
-        int cont=0;
         tiem.setText((String) arg);
+        
+        
         if(act){
         Tinventario.setText((String) arg);
         }
@@ -1025,22 +1075,28 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         if(act2){
         Tproduccion.setText((String) arg);
         ProduccionCont.setVisible(true);
-        reloj2.resume();
+        
         }
         
         if(act3){
+        EmpaCont.setVisible(true);
         Tempaquetado.setText((String) arg);
         reloj3.resume();
         }
         
         if(act4){
+        SalidaCont.setVisible(true);
         reloj4.resume();
         Tsalida.setText((String) arg);
         }
         
 
         InventarioCont.setText(Integer.toString(inicio.getContador()));
-        cont = inicio.getContador();
+        ProduccionCont.setText(Integer.toString(mov2.getContador()));
+        EmpaCont.setText(Integer.toString(mov3.getContador()));
+        SalidaCont.setText(Integer.toString(mov4.getContador()));
+        
+        
         
         if("00:00:30".equals(tiem.getText().toString())){    
         InventarioCont.setVisible(false);
@@ -1093,56 +1149,46 @@ public class simulacion extends javax.swing.JFrame implements Observer {
 
         if(i.equals(Tinventario.getText().toString())){
         //this.act=false;
-        
         Inv1.continuar();
         mov2.setVisible(true);
         mov2.continuar();
-        //act2= true;
-        }
-        
-        if("11".equals(InventarioCont.getText().toString())){
-       
+  
         Pro1.setVisible(true);
-        Pro1.continuar();
+        Pro1.continuar();//act2= true;
         }
         
-        if("17".equals(InventarioCont.getText().toString())){
+        if("1".equals(ProduccionCont.getText().toString())){
+        
+        
+        }
+        
+        if("6".equals(ProduccionCont.getText().toString())){
         Pro1.pausa();
         Pro2.setVisible(true);
         Pro2.continuar();
         }
         
-        if("25".equals(InventarioCont.getText().toString())){
+        if("12".equals(ProduccionCont.getText().toString())){
         Pro2.pausa();
         Pro3.setVisible(true);
         Pro3.continuar();
         }
         
-        if("31".equals(InventarioCont.getText().toString())){
+        if("18".equals(ProduccionCont.getText().toString())){
         Pro3.pausa();
         Pro4.setVisible(true);
         Pro4.continuar();
         }
         
-        if("37".equals(InventarioCont.getText().toString())){
+        if("24".equals(ProduccionCont.getText().toString())){
         Pro4.pausa();
         Pro5.setVisible(true);
         Pro5.continuar();
         }
         
-        if("43".equals(InventarioCont.getText().toString())){
+        if("30".equals(ProduccionCont.getText().toString())){
         Pro5.pausa();
         }
-        
-        
-        if(p.equals(Tproduccion.getText().toString())){
-        //this.act=false;
-        this.act2= true;
-        Pro1.continuar();
-        }
-        
-        
-        
         
         if("17".equals(InventarioCont.getText().toString())){
         
@@ -1169,9 +1215,117 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
         }
          
-    
-    
+        if(p.equals(Tproduccion.getText().toString())){
+        //this.act=false;
+        this.act2= true;
+        this.act3= true;
+        Pro1.continuar();
+        mov3.setVisible(true);
+        mov3.continuar();
         
+        }
+        
+        if("17".equals(ProduccionCont.getText().toString())){
+        
+        Pro2.continuar();
+        
+        }
+        
+         if("24".equals(ProduccionCont.getText().toString())){
+        
+        Pro3.continuar();
+        
+        } 
+         if("31".equals(ProduccionCont.getText().toString())){
+        
+        Pro4.continuar();
+        
+        }
+         
+         if("38".equals(ProduccionCont.getText().toString())){
+        
+        Pro5.continuar();
+        mov3.setVisible(false);
+        mov3.pausa();
+        
+        }
+        
+        
+        if(e.equals(Tproduccion.getText().toString())){
+        //this.act=false;
+        
+        this.act4= true;
+        mov4.setVisible(true);
+        mov4.continuar();
+        Em1.setVisible(true);
+        Em1.continuar();
+        }
+        
+        
+         
+    if("6".equals(EmpaCont.getText().toString())){
+        Em1.pausa();
+        Em2.setVisible(true);
+        Em2.continuar();
+        }
+        
+        if("12".equals(EmpaCont.getText().toString())){
+        Em2.pausa();
+        Em3.setVisible(true);
+        Em3.continuar();
+        }
+        
+        if("18".equals(EmpaCont.getText().toString())){
+        Em3.pausa();
+        Em4.setVisible(true);
+        Em4.continuar();
+        }
+        
+        if("24".equals(EmpaCont.getText().toString())){
+        Em4.pausa();
+        Em5.setVisible(true);
+        Em5.continuar();
+        }
+        
+        if("30".equals(EmpaCont.getText().toString())){
+        Em5.pausa();
+        }
+    
+        if(s.equals(Tproduccion.getText().toString())){
+
+        Sa1.setVisible(true);
+        Sa1.continuar();
+        }
+        
+        
+         
+    if("6".equals(SalidaCont.getText().toString())){
+        Sa1.pausa();
+        Sa2.setVisible(true);
+        Sa2.continuar();
+        }
+        
+        if("12".equals(SalidaCont.getText().toString())){
+        Sa2.pausa();
+        Sa3.setVisible(true);
+        Sa3.continuar();
+        }
+        
+        if("18".equals(SalidaCont.getText().toString())){
+        Sa3.pausa();
+        Sa4.setVisible(true);
+        Sa4.continuar();
+        }
+        
+        if("24".equals(SalidaCont.getText().toString())){
+        Sa4.pausa();
+        Sa5.setVisible(true);
+        Sa5.continuar();
+        }
+        
+        if("30".equals(SalidaCont.getText().toString())){
+        Sa5.pausa();
+        }
         
         }
         
@@ -1217,6 +1371,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     private practica2.Circulo Em4;
     private practica2.Circulo Em5;
     private javax.swing.JLabel EmpaCont;
+    private javax.swing.JButton Inicio;
     private practica2.Circulo Inv1;
     private practica2.Circulo Inv2;
     private practica2.Circulo Inv3;
@@ -1239,10 +1394,9 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel Tinventario;
     private javax.swing.JLabel Tproduccion;
     private javax.swing.JLabel Tsalida;
-    private practica2.Circulo circulo5;
+    private java.awt.Canvas canvas1;
     private practica2.Circulo finsalida;
     private practica2.Circulo inicio;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -1255,8 +1409,8 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private practica2.mov mov2;
-    private practica2.Circulo mov3;
-    private practica2.Circulo mov4;
+    private practica2.mov3 mov3;
+    private practica2.mov4 mov4;
     private javax.swing.JLabel tiem;
     // End of variables declaration//GEN-END:variables
 }

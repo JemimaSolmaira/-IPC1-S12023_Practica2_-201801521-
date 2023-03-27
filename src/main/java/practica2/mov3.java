@@ -11,7 +11,7 @@ import java.awt.Graphics;
  *
  * @author joz
  */
-public class mov extends javax.swing.JPanel implements Runnable{
+public class mov3 extends javax.swing.JPanel implements Runnable{
 
     private int x = getWidth()+200;
     private int y = getHeight();// Cordenada de origen en y
@@ -23,7 +23,7 @@ public class mov extends javax.swing.JPanel implements Runnable{
     private int contador=0;
     
     private int c;
-    public mov() {
+    public mov3() {
         initComponents();
         hilo = new Thread(this);
     }
@@ -81,14 +81,24 @@ public class mov extends javax.swing.JPanel implements Runnable{
     try {
             while(true){
              contador++;
-                // movimiento arriba
-                while (y > 10) {
+                
+                //movimiento izquierda
+                while (x > 10) {
                     Thread.sleep(37); // Velocidad con la que mueve el circulo
-                    y -= 10;
+                    x -= 10;
                     repaint(); // Se llama al metodo para redibujar el circulo
                 }
-               
-                //movimiento a la derecha 10
+
+              
+                // movimiento abajo
+                while (y <= getHeight() - 10) { 
+                    Thread.sleep(1); // Velocidad con la que mueve el circulo
+                    y += 10;
+                    
+                    repaint(); // Se llama al metodo para redibujar el circulo
+                }
+
+               //movimiento a la derecha 10
                 while (x <= getWidth()- 10) {
                     
                     Thread.sleep(1); // Velocidad con la que mueve el circulo
@@ -96,27 +106,19 @@ public class mov extends javax.swing.JPanel implements Runnable{
                     repaint(); // Se llama al metodo para redibujar el circulo
                 }
                 
-               // movimiento abajo
-                while (y <= getHeight() - 10) { 
-                    Thread.sleep(1); // Velocidad con la que mueve el circulo
-                    y += 10;
-                    
+
+               // movimiento arriba
+                while (y > 10) {
+                    Thread.sleep(35); // Velocidad con la que mueve el circulo
+                    y -= 10;
                     repaint(); // Se llama al metodo para redibujar el circulo
                 }
+               
+                
                 
 
-              //movimiento izquierda
-                while (x > 10) {
-                    Thread.sleep(37); // Velocidad con la que mueve el circulo
-                    x -= 10;
-                    repaint(); // Se llama al metodo para redibujar el circulo
                 }
-  
-                
-                }
-                
-
-
+ 
             
         } catch (Exception e) {
         }
