@@ -18,18 +18,33 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         setLocationRelativeTo(null);
+        
     }
 
     
-    private void verificacion(){
-    
-    if(this.CostoInv.getText().isEmpty()||  this.CostoEmpa.getText().isEmpty() 
-            ||this.CostoPro.getText().isEmpty() || this.CostoSa.getText().isEmpty() 
-            || this.TiempoEmpa.getText().isEmpty() ||this.TiempoInv.getText().isEmpty()
-            ||this.TiempoPro.getText().isEmpty() ||this.TiempoSa.getText().isEmpty()){
+    private boolean verificacion(){
+     
+        boolean entrar = false;
+        
+        try {
+            if(this.CostoInv.getText().isEmpty()&&  this.CostoEmpa.getText().isEmpty() 
+            &&this.CostoPro.getText().isEmpty() && this.CostoSa.getText().isEmpty() 
+            && this.TiempoEmpa.getText().isEmpty() && this.TiempoInv.getText().isEmpty()
+            &&this.TiempoPro.getText().isEmpty() && this.TiempoSa.getText().isEmpty()){
     JOptionPane.showMessageDialog(rootPane, "Complete todos los datos");
-    }
-  
+            
+            
+        }else {
+            entrar =  true;
+            
+            } }catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Solo se permiten ingresar numeros enteros");
+                
+        }
+    
+    return entrar;
+   
+     
     }
     
     /**
@@ -280,9 +295,16 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_CostoSaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+       if (verificacion()){
         simulacion sim = new simulacion(this.TiempoInv.getText().toString(),this.TiempoPro.getText().toString()
                 ,this.TiempoEmpa.getText().toString(),this.TiempoSa.getText().toString());
         sim.setVisible(true);
+       }else {
+       
+       
+       }
+ 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
