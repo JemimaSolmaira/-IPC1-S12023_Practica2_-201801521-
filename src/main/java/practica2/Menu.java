@@ -34,9 +34,11 @@ public class Menu extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(rootPane, "Complete todos los datos");
             
             
+                
+                
         }else {
             entrar =  true;
-            
+    
             } }catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Solo se permiten ingresar numeros enteros");
                 
