@@ -14,9 +14,8 @@ import javax.swing.JTextField;
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
+     public Reporte reporte = practica2.Practica2.reporte;
+    
     public Menu() {
         initComponents();
         setLocationRelativeTo(null);
@@ -200,24 +199,20 @@ public class Menu extends javax.swing.JFrame {
 
         Em.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Em.setText("00");
-        Em.setPreferredSize(new java.awt.Dimension(68, 35));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setText(":");
 
         Pm.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Pm.setText("00");
-        Pm.setPreferredSize(new java.awt.Dimension(68, 35));
 
         Ps.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Ps.setPreferredSize(new java.awt.Dimension(68, 35));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setText(":");
 
         Ph.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Ph.setText("00");
-        Ph.setMinimumSize(new java.awt.Dimension(68, 35));
         Ph.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PhActionPerformed(evt);
@@ -228,31 +223,26 @@ public class Menu extends javax.swing.JFrame {
         jLabel13.setText(":");
 
         Es.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Es.setPreferredSize(new java.awt.Dimension(68, 35));
 
         Eh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Eh.setText("00");
-        Eh.setPreferredSize(new java.awt.Dimension(68, 35));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel14.setText(":");
 
         Ss.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Ss.setPreferredSize(new java.awt.Dimension(68, 35));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel15.setText(":");
 
         Sh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Sh.setText("00");
-        Sh.setPreferredSize(new java.awt.Dimension(68, 35));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel17.setText(":");
 
         Sm.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Sm.setText("00");
-        Sm.setPreferredSize(new java.awt.Dimension(68, 35));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel10.setText("Q");
@@ -435,28 +425,29 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(165, 165, 165))
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel2)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel18)
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel19)
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel3))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(263, 263, 263)
-                .addComponent(jButton1)
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel2)
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel18)
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel19)
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel3))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(263, 263, 263)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -465,11 +456,12 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel18)
+                        .addComponent(jLabel19)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -542,6 +534,14 @@ public class Menu extends javax.swing.JFrame {
         
          JOptionPane.showMessageDialog(rootPane, "los datos deben ser numeros enteros");
         }else {
+        
+        reporte.reporte(this.ICosto.getText().toString(), 
+                this.PCosto.getText().toString(), 
+                this.ECosto.getText().toString(), 
+                this.SCosto.getText().toString()
+                , Integer.toString(icant), Integer.toString(pcant), 
+                Integer.toString(ecant), 
+                Integer.toString(scant));
         
         simulacion sim = new simulacion(inventario, produccion, empaquetado, salida, icant, pcant, ecant, scant);
         sim.setVisible(true);

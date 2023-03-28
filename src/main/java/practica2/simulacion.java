@@ -8,11 +8,13 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.TimerTask;
+import javax.swing.JFileChooser;
 import javax.swing.Timer;
 
 /**
@@ -43,6 +45,8 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     
     Timer timer, timer2, timer3 ;
    
+    
+    public Reporte reporte = practica2.Practica2.reporte;
     
     public simulacion(String i, String p, String e, String s, int icant, int pcant, int ecant, int scant) {
         
@@ -168,6 +172,11 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         tiem.setText("00:00:00");
 
         jButton3.setText("Reporte");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -660,6 +669,21 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     private void InventarioContComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_InventarioContComponentHidden
 
     }//GEN-LAST:event_InventarioContComponentHidden
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String ruta = "C:\\Users\\joz\\OneDrive\\Documentos\\NetBeansProjects\\Proyecto1\\Factura.html";
+        JFileChooser seleccionarCarpeta = new JFileChooser();
+        seleccionarCarpeta.setCurrentDirectory(new File("."));
+        seleccionarCarpeta.setDialogTitle("Seleccione la carpeta de Descarga");
+        seleccionarCarpeta.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        seleccionarCarpeta.setAcceptAllFileFilterUsed(false);
+ 
+        if(seleccionarCarpeta.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
+            ruta = seleccionarCarpeta.getSelectedFile().getPath();
+            ruta = ruta+"\\Reporte.html";
+            reporte.setRuta(ruta);   
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
    
     
