@@ -1,21 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package practica2;
 
 import java.util.Observable;
 
-/**
- *
- * @author diego
- */
+
 public class tiempos extends Observable implements Runnable{
     
-    /*
-        Se define esta clase como Observable para actualizar el valor del timepo
-        a las clases Observer
-    */
+    
     private int horas, minutos, segundos;
 
     // Constructo de la clase de temporizador
@@ -25,8 +16,7 @@ public class tiempos extends Observable implements Runnable{
         this.segundos = segundos;
     }
     
-    
-    
+
     @Override
     public void run() {
         String tiempo;
@@ -55,10 +45,7 @@ public class tiempos extends Observable implements Runnable{
                     tiempo += segundos;
                 }
                 
-                /*
-                    Enviamos la variable que cambio 
-                    a las clases observer
-                */
+                
                 this.setChanged();
                 this.notifyObservers(tiempo);
                 this.clearChanged();
