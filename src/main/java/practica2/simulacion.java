@@ -6,10 +6,14 @@ package practica2;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.TimerTask;
+import javax.swing.Timer;
 
 /**
  *
@@ -29,7 +33,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     
     Thread reloj = new Thread(tim);
     Thread reloj1 = new Thread(tinv);
-    Thread reloj2 = new Thread(tpro);
+    Thread reloj2  = new Thread(tpro);
     Thread reloj3 = new Thread(tem);
     Thread reloj4 = new Thread(tsa);
     private boolean actT,act,act2,act3,act4;
@@ -37,7 +41,12 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     int icant, pcant, ecant, scant;
     String i,p,e,s;
     
+    Timer timer, timer2, timer3 ;
+   
+    
     public simulacion(String i, String p, String e, String s, int icant, int pcant, int ecant, int scant) {
+        
+        
         this.i=i;
         this.p=p;
         this.e=e;
@@ -48,16 +57,12 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         this.scant = scant;
         
         initComponents();
-        vis();
+        
         
          
     }
 
-    public void vis(){
-        
-    
-        
-    }
+ 
     
     
     /**
@@ -284,6 +289,11 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         });
 
         InventarioCont.setText("00");
+        InventarioCont.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                InventarioContComponentHidden(evt);
+            }
+        });
 
         Tinventario.setText("00:00:00");
         Tinventario.addInputMethodListener(new java.awt.event.InputMethodListener() {
@@ -452,10 +462,10 @@ public class simulacion extends javax.swing.JFrame implements Observer {
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 117, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(558, 558, 558)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(521, 521, 521))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,46 +504,79 @@ public class simulacion extends javax.swing.JFrame implements Observer {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(213, 213, 213))
+                        .addGap(196, 196, 196))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addComponent(mov3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(139, 139, 139)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(Inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(finsalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addComponent(finsalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void InicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioActionPerformed
-
-        // Se agrega el cambio resibido en la clase Observable(temporizador)
+       
+//        TimerTask tarea = new TimerTask() {
+//            @Override
+//            public void run() {
+//                reloj2.start();
+//            }
+//        };
+        
+//        this.timer = new Timer(10000,null);
+//         
+//         timer.addActionListener(new ActionListener() {
+//             @Override
+//             public void actionPerformed(ActionEvent e) {
+//               reloj2.start();
+//               
+//             }
+//         });
+//         timer.start();
+//       
+//         
+//         
+//         this.timer2 = new Timer(20000,null);
+//          timer2.addActionListener(new ActionListener() {
+//             @Override
+//             public void actionPerformed(ActionEvent e) {
+//               reloj3.start();
+//               
+//             }
+//         });
+//         timer2.start();
+//         
+//         
+//         this.timer3 = new Timer(30000,null);
+//          timer3.addActionListener(new ActionListener() {
+//             @Override
+//             public void actionPerformed(ActionEvent e) {
+//               reloj4.start();
+//               
+//             }
+//         });
+//         timer3.start();
+         
+         
+        
+        // Se agrega el cambio recibido en la clase Observable(temporizador)
         tim.addObserver(this);
         tinv.addObserver(this);
         tpro.addObserver(this);
         tem.addObserver(this);
         tsa.addObserver(this);
 
+        
         // Se ejecuta el hilo del temporizador
         reloj.start();
         reloj1.start();
-        act =true;
-        
-        
-//        act2 = false;
-//        reloj2.start();
-//        reloj2.suspend();
-        
-     
-        
+        reloj2.start();
+        reloj3.start();
+    
         //inicio
         inicio.setC(0);
         inicio.setColor(Color.yellow);
@@ -554,7 +597,10 @@ public class simulacion extends javax.swing.JFrame implements Observer {
 
         //Empaquetado
     
-
+        mov2.setColor(Color.blue);
+        mov2.setdireccion(100);
+        mov2.inicio();
+        mov2.pausa();
         
         mov3.setColor(Color.green);
         mov3.setdireccion(100);
@@ -589,16 +635,8 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_mov2ComponentShown
 
     private void jPanel2ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentResized
-//          try {
-//            
-//           if(iniciopro){ 
-//        act2 = true;
-//        reloj2.start(); 
-//       }    
-//              
-//        } catch (Exception e) {
-//        }
-//        
+          
+        
         
          
     }//GEN-LAST:event_jPanel2ComponentResized
@@ -619,6 +657,10 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
     }//GEN-LAST:event_mov2ComponentMoved
 
+    private void InventarioContComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_InventarioContComponentHidden
+
+    }//GEN-LAST:event_InventarioContComponentHidden
+
    
     
     @Override
@@ -626,89 +668,76 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
         tiem.setText((String) arg);
         
-        
-        if(act){
         Tinventario.setText((String) arg);
-        }
-//        
-//        if(act2){
-//        Tproduccion.setText((String) arg);
-//        ProduccionCont.setVisible(true);
-//        
-//        }
-//        
-//        if(act3){
-//        EmpaCont.setVisible(true);
-//        Tempaquetado.setText((String) arg);
-//        reloj3.resume();
-//        }
-//        
-//        if(act4){
-//        SalidaCont.setVisible(true);
-//        reloj4.resume();
-//        Tsalida.setText((String) arg);
-//        }
+        Tempaquetado.setText((String) arg);
+        Tproduccion.setText((String) arg);
         
-
+        
         InventarioCont.setText(Integer.toString(inicio.getContador()));
         ProduccionCont.setText(Integer.toString(mov2.getContador()));
         EmpaCont.setText(Integer.toString(mov3.getContador()));
         SalidaCont.setText(Integer.toString(mov4.getContador()));
         
+
         
-        
-        
-        
-        
-        if("00:00:30".equals(tiem.getText().toString())){    
+        if("00:00:31".equals(tiem.getText().toString())){    
         InventarioCont.setVisible(false);
         inicio.setColor(getBackground());
         Circuloinventario.pausa();
         }
         
+        
         if(i.equals(tiem.getText().toString())){
+        
         Circuloinventario.continuar();
+        mov2.continuar();
+        mov2.setVisible(true);
+        Circuloproduccion.inicio();
+        ProduccionCont.setVisible(true);
+        }
+        
+        if("00:00:30".equals(Tproduccion.getText().toString())){    
+ 
+        Circuloproduccion.pausa();
+        }
+  
+        if(p.equals(Tinventario.getText().toString())){
+        
+        mov3.continuar();
+        mov3.setVisible(true);
+        Circuloproduccion.continuar();
+        circuloempaquetado.inicio();
         
         }
         
-        //entrada de circulos
+        if("00:00:30".equals(Tempaquetado.getText().toString())){    
+ 
+        circuloempaquetado.pausa();
+        }
         
         
+        if(e.equals(tiem.getText().toString())){
         
+        mov4.continuar();
+        mov4.setVisible(true);
+        circuloempaquetado.continuar();
+        circulosalida.inicio();
+        
+        }
+        
+        if("00:00:30".equals(Tsalida.getText().toString())){    
+ 
+        circulosalida.pausa();
+        }
+        
+        if(s.equals(tiem.getText().toString())){
+        
+        circulosalida.continuar();
        
         
-//        //salida de circulos 
-//
-//        if(i.equals(Tinventario.getText().toString())){
-//        //this.act=false;
-//        Inv1.continuar();
-//        mov2.setVisible(true);
-//        mov2.continuar();
-//  
-//        Pro1.setVisible(true);
-//        Pro1.continuar();//act2= true;
-//        this.iniciopro = true;
-//        }
-//        
-//
-//         
-//        if(p.equals(Tproduccion.getText().toString())){
-//        //this.act=false;
-//        this.act2= true;
-//        this.act3= true;
-//        Pro1.continuar();
-//        mov3.setVisible(true);
-//        mov3.continuar();
-//        
-//        }
-     
-        
-        
-      
-        
-         
-    
-        
+        }
+       
+
         }
         
     /**
