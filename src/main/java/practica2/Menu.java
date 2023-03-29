@@ -529,6 +529,10 @@ public class Menu extends javax.swing.JFrame {
         pcant = cant(this.Ps.getText().toString(), this.Pm.getText().toString(), this.Ph.getText().toString());
         ecant = cant(this.Es.getText().toString(), this.Em.getText().toString(), this.Eh.getText().toString());
         scant = cant(this.Ss.getText().toString(), this.Sm.getText().toString(), this.Sh.getText().toString());
+        pcant= pcant + icant;
+        ecant= ecant+ pcant;
+        scant= ecant+scant;
+        
         
         if (icant==0 || pcant==0 || ecant==0 || scant==0){
         

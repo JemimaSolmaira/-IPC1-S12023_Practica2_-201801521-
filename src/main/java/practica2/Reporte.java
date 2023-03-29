@@ -12,11 +12,8 @@ public class Reporte {
     private int Pcosto;
     private int Ecosto;
     private int Scosto;
-    private String ruta = "C:\\Users\\joz\\OneDrive\\Documentos\\NetBeansProjects\\Proyecto1\\Factura.html";
+    private String ruta = "C:\\Users\\joz\\OneDrive\\Documentos\\NetBeansProjects\\practica2\\reporte.html";
 
-    public void setRuta(String ruta) {
-        this.ruta = ruta;
-    }
     
     
     
@@ -133,6 +130,9 @@ public class Reporte {
         return ruta;
     }
     
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
     
     
 }

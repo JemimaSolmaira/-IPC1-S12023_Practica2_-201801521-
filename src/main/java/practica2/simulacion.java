@@ -62,11 +62,18 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
         initComponents();
         
+
         
-         
     }
 
- 
+     
+    
+    ActionListener a =  new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+        }
+    };
     
     
     /**
@@ -187,10 +194,10 @@ public class simulacion extends javax.swing.JFrame implements Observer {
 
         ProduccionCont.setText("00");
         ProduccionCont.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 ProduccionContInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -270,13 +277,13 @@ public class simulacion extends javax.swing.JFrame implements Observer {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(Tsalida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SalidaCont)
-                .addGap(129, 129, 129))
+                .addGap(22, 22, 22))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(circulosalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,10 +313,10 @@ public class simulacion extends javax.swing.JFrame implements Observer {
 
         Tinventario.setText("00:00:00");
         Tinventario.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 TinventarioInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -671,7 +678,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_InventarioContComponentHidden
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String ruta = "C:\\Users\\joz\\OneDrive\\Documentos\\NetBeansProjects\\Proyecto1\\Factura.html";
+        String ruta = "C:\\Users\\joz\\OneDrive\\Documentos\\NetBeansProjects\\practica2\\reporte.html";
         JFileChooser seleccionarCarpeta = new JFileChooser();
         seleccionarCarpeta.setCurrentDirectory(new File("."));
         seleccionarCarpeta.setDialogTitle("Seleccione la carpeta de Descarga");
@@ -681,11 +688,12 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         if(seleccionarCarpeta.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
             ruta = seleccionarCarpeta.getSelectedFile().getPath();
             ruta = ruta+"\\Reporte.html";
-            reporte.setRuta(ruta);   
+            reporte.setRuta(ruta);  
+            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-   
+  
     
     @Override
     public void update(Observable o, Object arg) {
@@ -705,7 +713,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
 
         
         if("00:00:31".equals(tiem.getText().toString())){    
-        InventarioCont.setVisible(false);
+//        InventarioCont.setVisible(false);
         inicio.setColor(getBackground());
         Circuloinventario.pausa();
         }
@@ -720,12 +728,12 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         ProduccionCont.setVisible(true);
         }
         
-        if("00:00:30".equals(Tproduccion.getText().toString())){    
+        if("30".equals(ProduccionCont.getText().toString())){    
  
         Circuloproduccion.pausa();
         }
   
-        if(p.equals(Tinventario.getText().toString())){
+        if(Integer.toString(pcant).equals(InventarioCont.getText().toString())){
         
         mov3.continuar();
         mov3.setVisible(true);
@@ -734,13 +742,13 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
         }
         
-        if("00:00:30".equals(Tempaquetado.getText().toString())){    
+        if("30".equals(EmpaCont.getText().toString())){    
  
         circuloempaquetado.pausa();
         }
         
         
-        if(e.equals(tiem.getText().toString())){
+        if(Integer.toString(ecant).equals(InventarioCont.getText().toString())){
         
         mov4.continuar();
         mov4.setVisible(true);
@@ -749,7 +757,7 @@ public class simulacion extends javax.swing.JFrame implements Observer {
         
         }
         
-        if("00:00:30".equals(Tsalida.getText().toString())){    
+        if("30".equals(SalidaCont.getText().toString())){    
  
         circulosalida.pausa();
         }

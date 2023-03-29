@@ -17,18 +17,18 @@ public class Circulocuadros extends javax.swing.JPanel implements Runnable {
      * Creates new form circulo
      */
     
-    private static final int CANT_FILAS = 5;
-    private static final int CANT_COLUMNAS = 6;
-    private static final int CANT_CIRCULOS = CANT_FILAS * CANT_COLUMNAS;
-    private static final int DIAMETRO_CIRCULO = 30;
-    private static final int MARGEN_HORIZONTAL = 50;
-    private static final int MARGEN_VERTICAL = 50;
-    private static final int ESPACIO_ENTRE_CIRCULOS = 10;
-    private static final int TIEMPO_ENTRE_CIRCULOS = 1000;
+    private static final int cantfilas = 5;
+    private static final int cantcolumnas = 6;
+    private static final int cantcirculos = cantfilas * cantcolumnas;
+    private static final int diametro = 30;
+    private static final int horizontal = 50;
+    private static final int vertical = 50;
+    private static final int espaciocirculos = 10;
+    private static final int tiempocirculos = 1000;
     
     private Color color;
-    private int[] posicionesX = new int[CANT_CIRCULOS];
-    private int[] posicionesY = new int[CANT_CIRCULOS];
+    private int[] posicionesX = new int[cantcirculos];
+    private int[] posicionesY = new int[cantcirculos];
     private int circulosDibujados = 0;
     private boolean enEjecucion = true;
     private boolean desaparecer = false;
@@ -36,11 +36,11 @@ public class Circulocuadros extends javax.swing.JPanel implements Runnable {
     
    Thread hilo;
     public Circulocuadros() {
-       for (int i = 0; i < CANT_CIRCULOS; i++) {
-            int fila = i / CANT_COLUMNAS;
-            int columna = i % CANT_COLUMNAS;
-            posicionesX[i] = MARGEN_HORIZONTAL + columna * (DIAMETRO_CIRCULO + ESPACIO_ENTRE_CIRCULOS);
-            posicionesY[i] = MARGEN_VERTICAL + fila * (DIAMETRO_CIRCULO + ESPACIO_ENTRE_CIRCULOS);
+       for (int i = 0; i < cantcirculos; i++) {
+            int fila = i / cantcolumnas;
+            int columna = i % cantcolumnas;
+            posicionesX[i] = horizontal + columna * (diametro + espaciocirculos);
+            posicionesY[i] = vertical + fila * (diametro + espaciocirculos);
     }
        hilo = new Thread(this);
     }
@@ -73,9 +73,9 @@ public class Circulocuadros extends javax.swing.JPanel implements Runnable {
              super.paintComponent(g);
         if(desaparecer){
         
-            for (int i = 0; i < CANT_CIRCULOS - circulosDibujados; i++) {
+            for (int i = 0; i < cantcirculos - circulosDibujados; i++) {
             g.setColor(color);
-            g.fillOval(posicionesX[i], posicionesY[i], DIAMETRO_CIRCULO, DIAMETRO_CIRCULO);
+            g.fillOval(posicionesX[i], posicionesY[i], diametro, diametro);
            
         }
         }
@@ -83,7 +83,7 @@ public class Circulocuadros extends javax.swing.JPanel implements Runnable {
         else{
          for (int i = 0; i < circulosDibujados; i++) {
             g.setColor(color);
-            g.fillOval(posicionesX[i], posicionesY[i], DIAMETRO_CIRCULO, DIAMETRO_CIRCULO);
+            g.fillOval(posicionesX[i], posicionesY[i], diametro,diametro);
         
         }   
             
@@ -108,18 +108,24 @@ public class Circulocuadros extends javax.swing.JPanel implements Runnable {
         hilo.suspend();
     }
     
+    public void detener(){
+    hilo.stop();
+    
+    }
+    
+    
     @Override
     public void run() {
         
        while (enEjecucion) {
             try {
-                Thread.sleep(TIEMPO_ENTRE_CIRCULOS);
+                Thread.sleep(tiempocirculos);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             circulosDibujados++;
             repaint();
-            if (circulosDibujados == CANT_CIRCULOS) {
+            if (circulosDibujados == cantcirculos) {
                 circulosDibujados = 0;
                 desaparecer = true;
             }
